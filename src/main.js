@@ -5,10 +5,10 @@ const WEEK_DAYS = 7
 const ONE_HOUR_INS_MS = 1000 * 60
 const ONE_DAY_IN_MS = ONE_HOUR_INS_MS * 60 * 24
 
-const page = document.getElementById('page')
+const brand = document.getElementById('brand')
 const nextButton = document.getElementById('next-button')
 const previousButton = document.getElementById('previous-button')
-const brand = document.getElementById('brand')
+const modal = document.getElementById('modal')
 
 let offsetWeek = 0
 let currentDateInMS
@@ -33,10 +33,7 @@ const addMediaDay = ({ id, data }) => {
     const { url, media_type } = data
     const mediaElement = media_type === 'image' ? createImageDayElement(url) : createVideoDayElement(url)
     parentElement.append(mediaElement)
-    parentElement.onclick = (e) => {
-        e.preventDefault()
-        return showPage(data, parentElement.innerHTML)
-    }
+    parentElement.onclick = () => showModal(data, parentElement.innerHTML)
     mediaElement.onload = () => parentElement.classList.remove('hide')
 }
 
@@ -48,25 +45,26 @@ const createImageDayElement = (url) => {
 
 const createVideoDayElement = url => {
     const embed = document.createElement('embed')
-    const youtubeParams = '?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1&autohide=1'
+    const youtubeParams = '?autoplay=0&mute=1&controls=1&showinfo=0&rel=0&autohide=1'
     embed.src = `${url}${youtubeParams}`
     return embed
 }
 
-const hidePage = () => page.classList.add('hide')
+const hideModal = () => modal.classList.add('hide')
+const toogleFullModal = () => modal.classList.toggle('full')
 
-const showPage = (data, htmlString) => {
+const showModal = (data, htmlString) => {
     const template = `
     <div class="content">
-        <a onclick="hidePage()">[X] CLOSE</a>
+        <a onclick="hideModal()">[X] CLOSE</a>
         <h1>${data.title}</h1>
         <small>${data.date}</small>
         <p>${data.explanation}</p>
     </div>
-    <div class="media">${htmlString}</div>
+    <div class="media" onclick="toogleFullModal()">${htmlString}</div>
     `
-    page.innerHTML = template
-    page.classList.remove('hide')
+    modal.innerHTML = template
+    modal.classList.remove('hide')
 }
 
 const loadImages = async (day = 1) => {
@@ -103,7 +101,7 @@ brand.onclick = () => {
 }
 
 const render = () => {
-    hidePage()
+    hideModal()
     clearImages()
     loadCurrentDateInMS()
     loadImages()
