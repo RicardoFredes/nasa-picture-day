@@ -29,6 +29,9 @@ nav {
     align-items: center;
     padding: 0 24px;
 }
+nav a {
+    line-height: var(--nav-height);
+}
 nav a.hide {
     visibility: hidden;
 }
@@ -114,10 +117,12 @@ nav h1 {
     margin-bottom: 32px;
     display: block
 }
-#modal .media > * {
+#modal .media {
     flex-grow: 1;
+}
+#modal .media > * {
     cursor: pointer;
-    max-width: 100%;
+    width: 100%;
     height: 100vh;
     object-fit: cover;
     text-align: center;
