@@ -1,0 +1,17 @@
+{
+  "name": "nasa-picture-day",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:RicardoFredes/nasa-picture-day.git",
+  "author": "fredes <ricardofredes@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "bin/build.sh",
+    "lint": "prettier --write 'src/**/*.{js,css, html}'"
+  },
+  "devDependencies": {
+    "minify": "^6.0.0",
+    "prettier": "^2.1.2",
+    "uglify-js": "^3.11.3"
+  }
+}
