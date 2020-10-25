@@ -69,7 +69,7 @@ const showModal = (data, htmlString) => {
         <small>${data.date}</small>
         <p>${data.explanation}</p>
     </div>
-    <a href="${data.hdurl}" target="_blank" class="media">${htmlString}</a>
+    <a href="${data.hdurl}" title="Open large size image" target="_blank" class="media">${htmlString}</a>
     `
     modal.innerHTML = template
     modal.classList.remove('hide')
@@ -105,9 +105,20 @@ const pushHistory = () => {
     history.pushState(status, null, url)
 }
 
+window.onpopstate = () => {
+    const page = getPage()
+    if (page !== offsetWeek) render(page, { notUpdateHistory: true })
+    else hideModal()
+}
+
 const updateNavigation = () => {
     if (offsetWeek === 0) nextButton.classList.add('hide')
     else nextButton.classList.remove('hide')
+}
+
+const getPage = () => {
+    const page = location.search.replace(/.*page=(\d)/, '$1')
+    return Number(page) || 0
 }
 
 const render = (page, options = {}) => {
@@ -118,17 +129,6 @@ const render = (page, options = {}) => {
     loadImages()
     updateNavigation()
     if (!options.notUpdateHistory) pushHistory()
-}
-
-window.onpopstate = () => {
-    const page = getPage()
-    if (page !== offsetWeek) render(page, { notUpdateHistory: true })
-    else hideModal()
-}
-
-const getPage = () => {
-    const page = location.search.replace(/.*page=(\d)/, '$1')
-    return Number(page) || 0
 }
 
 const initialize = () => {
