@@ -113,7 +113,7 @@ nav h1 {
     padding: 32px;
     overflow-y: auto;
 }
-#modal a {
+#modal .content > a {
     margin-bottom: 32px;
     display: block
 }
@@ -172,6 +172,15 @@ nav h1 {
     }
     #modal .content {
         height: 40vh;
+    }
+    #modal .content > a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: var(--nav-height);
+        background-color: black;
+        padding: 0 12px;
+        width: 100vw;
     }
 }
 

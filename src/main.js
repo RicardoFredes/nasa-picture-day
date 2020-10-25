@@ -50,8 +50,9 @@ const createVideoDayElement = url => {
     return embed
 }
 
-const hideModal = () => modal.classList.add('hide')
 const toogleFullModal = () => modal.classList.toggle('full')
+
+const hideModal = () => modal.classList.add('hide')
 
 const showModal = (data, htmlString) => {
     const template = `
@@ -61,10 +62,11 @@ const showModal = (data, htmlString) => {
         <small>${data.date}</small>
         <p>${data.explanation}</p>
     </div>
-    <div class="media" onclick="toogleFullModal()">${htmlString}</div>
+    <a href="${data.hdurl}" target="_blank" class="media">${htmlString}</a>
     `
     modal.innerHTML = template
     modal.classList.remove('hide')
+    pushHistory()
 }
 
 const loadImages = async (day = 1) => {
@@ -83,28 +85,47 @@ const clearImages = (day = 1) => {
     clearImages(day + 1)
 }
 
-previousButton.onclick = () => {
-    ++offsetWeek
-    nextButton.classList.remove('hide')
-    render()
-}
-nextButton.onclick = () => {
-    --offsetWeek
-    if (offsetWeek >= 0) render()
-    if (offsetWeek === 0) nextButton.classList.add('hide')
-}
-brand.onclick = () => {
-    if (offsetWeek === 0) return
-    offsetWeek = 0
-    nextButton.classList.add('hide')
-    render()
+previousButton.onclick = () => render(offsetWeek + 1)
+
+nextButton.onclick = () => render(offsetWeek - 1)
+
+brand.onclick = () => offsetWeek && render(0)
+
+const pushHistory = () => {
+    const page = offsetWeek
+    const status = { page }
+    const url = page ? `?page=${page}` : '?'
+    history.pushState(status, null, url)
 }
 
-const render = () => {
+const updateNavigation = () => {
+    if (offsetWeek === 0) nextButton.classList.add('hide')
+    else nextButton.classList.remove('hide')
+}
+
+const render = (page, options = {}) => {
+    if (typeof page === 'number') offsetWeek = page
     hideModal()
     clearImages()
     loadCurrentDateInMS()
     loadImages()
+    updateNavigation()
+    if (!options.notUpdateHistory) pushHistory()
 }
 
-render()
+window.onpopstate = () => {
+    const page = getPage()
+    if (page !== offsetWeek) render(page, { notUpdateHistory: true })
+    else hideModal()
+}
+
+const getPage = () => {
+    const page = location.search.replace(/.*page=(\d)/, '$1')
+    return Number(page) || 0
+}
+
+const initialize = () => {
+    render(getPage(), { notUpdateHistory: true })
+}
+
+initialize()
