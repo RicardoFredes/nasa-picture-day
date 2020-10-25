@@ -1,6 +1,8 @@
 const NASA_API_KEY = 'Owy40anZTbWVb0Hbe3fYEkv6OqG2qdLYyQc9y7Th'
 const NASA_API = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`
 
+const image404 = 'https://cdn.dribbble.com/users/1651691/screenshots/5336666/404.png'
+
 const WEEK_DAYS = 7
 const ONE_HOUR_INS_MS = 1000 * 60
 const ONE_DAY_IN_MS = ONE_HOUR_INS_MS * 60 * 24
@@ -30,10 +32,17 @@ const fetchNasaData = async (offset = 0) => {
 
 const addMediaDay = ({ id, data }) => {
     const parentElement = document.getElementById(id)
-    const { url, media_type } = data
+    const { url, media_type, error } = data
+    if (error) return addErrorImage(parentElement) 
     const mediaElement = media_type === 'image' ? createImageDayElement(url) : createVideoDayElement(url)
     parentElement.append(mediaElement)
     parentElement.onclick = () => showModal(data, parentElement.innerHTML)
+    mediaElement.onload = () => parentElement.classList.remove('hide')
+}
+
+const addErrorImage = (parentElement) => {
+    const mediaElement = createImageDayElement(image404)
+    parentElement.append(mediaElement)
     mediaElement.onload = () => parentElement.classList.remove('hide')
 }
 
