@@ -64,7 +64,7 @@ const hideModal = () => modal.classList.add('hide')
 const showModal = (data, htmlString) => {
     const template = `
     <div class="content">
-        <a onclick="hideModal()">[X] CLOSE</a>
+        <a onclick="history.back()">[X] CLOSE</a>
         <h1>${data.title}</h1>
         <small>${data.date}</small>
         <p>${data.explanation}</p>
