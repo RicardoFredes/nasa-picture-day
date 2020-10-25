@@ -127,14 +127,6 @@ nav h1 {
     object-fit: cover;
     text-align: center;
 }
-#modal.full .content {
-    display: none;
-}
-#modal.full .media > * {
-    width: 100vw;
-    height: 100vh;
-    object-fit: contain;
-}
 
 @keyframes zoom-in {
     from {

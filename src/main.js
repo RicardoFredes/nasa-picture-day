@@ -50,8 +50,6 @@ const createVideoDayElement = url => {
     return embed
 }
 
-const toogleFullModal = () => modal.classList.toggle('full')
-
 const hideModal = () => modal.classList.add('hide')
 
 const showModal = (data, htmlString) => {
