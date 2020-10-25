@@ -1,4 +1,4 @@
-# nasa-picture-day
+# Nasa picture day
 
 [DEMO](https://ricardofredes.github.io/nasa-picture-day/index.html)
 
