@@ -111,11 +111,15 @@ nav h1 {
     max-width: 100%;
     width: 450px;
     padding: 32px;
+    max-height: 100vh;
     overflow-y: auto;
 }
 #modal .content > a {
-    margin-bottom: 32px;
-    display: block
+    line-height: var(--nav-height);
+    display: block;
+    background: black;
+    position: sticky;
+    top: -32px;
 }
 #modal .media {
     flex-grow: 1;
@@ -169,8 +173,6 @@ nav h1 {
         position: absolute;
         top: 0;
         left: 0;
-        line-height: var(--nav-height);
-        background-color: black;
         padding: 0 12px;
         width: 100vw;
     }
