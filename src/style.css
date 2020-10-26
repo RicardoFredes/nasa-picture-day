@@ -46,9 +46,9 @@ nav h1 {
   display: grid;
   height: calc(100vh - var(--nav-height));
   grid-template:
-    "day1 day2 day3" 1fr
-    "day1 day4 day5" 1fr
-    "day1 day6 day7" 1fr
+    'day1 day2 day3' 1fr
+    'day1 day4 day5' 1fr
+    'day1 day6 day7' 1fr
     / 7fr 1.5fr 1.5fr;
 }
 #week > * {
@@ -158,9 +158,9 @@ nav h1 {
 @media (orientation: portrait) {
   #week {
     grid-template:
-      "day1 day1 day1" 7fr
-      "day2 day3 day4" 1.5fr
-      "day5 day6 day7" 1.5fr
+      'day1 day1 day1' 7fr
+      'day2 day3 day4' 1.5fr
+      'day5 day6 day7' 1.5fr
       / 1fr 1fr 1fr;
   }
   #modal {
