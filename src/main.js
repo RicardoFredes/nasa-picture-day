@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ONE_HOUR_IN_MS = 1000 * 60
   const ONE_DAY_IN_MS = ONE_HOUR_IN_MS * 60 * 24
   const WEEK_IN_MS = WEEK_DAYS * ONE_DAY_IN_MS
-  const SECURITY_TIMEZONE = 3
+  const SECURITY_TIMEZONE = 6
 
   const brand = document.getElementById('brand')
   const nextButton = document.getElementById('next-button')

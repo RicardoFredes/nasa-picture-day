@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "bin/build.sh",
-    "lint": "prettier --write 'src/**/*.{js,css, html}'"
+    "lint": "prettier --write 'src/**/*.{js,css,html}'"
   },
   "devDependencies": {
     "minify": "^6.0.0",
